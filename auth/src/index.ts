@@ -8,7 +8,6 @@ import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
 import { errorHandler } from "./middlewares/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
-import { sortAndDeduplicateDiagnostics } from "typescript";
 
 const app = express();
 app.use(json());
