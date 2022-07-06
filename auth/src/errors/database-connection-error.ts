@@ -6,7 +6,7 @@ export class DatabaseConnectionError extends CustomError {
 
   constructor() {
     // used message for logging
-    super("Erorr connecting for db");
+    super("error connecting for db");
 
     Object.setPrototypeOf(this, DatabaseConnectionError.prototype);
   }
