@@ -32,11 +32,7 @@ router.post(
       throw new BadRequestError("Email in use");
     }
 
-    /*
-    step 2 hashing password for security
-     */
-
-    // step 3 create new user
+    // step 2 create new user
 
     const user = User.build({ email, password });
     await user.save();

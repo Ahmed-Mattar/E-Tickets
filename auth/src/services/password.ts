@@ -3,7 +3,7 @@ import { promisify } from "util";
 
 const scryptAsync = promisify(scrypt);
 
-export class Passowrd {
+export class Password {
   static async toHash(password: string) {
     // hashing by itself isn't enough to protect password
     // salt are appended to the end of passwords before they are hashed
