@@ -34,6 +34,11 @@ app.all("*", async (req, res) => {
 app.use(errorHandler);
 
 const start = async () => {
+  // set using kubectl secrets
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY must be defined");
+  }
+
   try {
     // instead of localhost url use the service url followed by the port that mongoose use
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
