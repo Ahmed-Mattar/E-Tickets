@@ -23,6 +23,7 @@ beforeEach(async () => {
 
 // stop server after all the tests finished
 afterAll(async () => {
+  jest.setTimeout(20000);
   if (mongo) {
     await mongo.stop();
   }
