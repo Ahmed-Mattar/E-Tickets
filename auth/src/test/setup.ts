@@ -1,6 +1,5 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
-import { app } from "../app";
 
 // connect to the in memory mongo server before any test
 let mongo: any;
@@ -23,9 +22,5 @@ beforeEach(async () => {
 
 // stop server after all the tests finished
 afterAll(async () => {
-  jest.setTimeout(20000);
-  if (mongo) {
-    await mongo.stop();
-  }
-  await mongoose.connection.close();
+  await mongo.stop();
 });
