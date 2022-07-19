@@ -1,8 +1,8 @@
 import { Message, Stan } from "node-nats-streaming";
-import { subjects } from "./subjects";
+import { Subjects } from "./subjects";
 
 interface Event {
-  subject: subjects;
+  subject: Subjects;
   data: any;
 }
 
