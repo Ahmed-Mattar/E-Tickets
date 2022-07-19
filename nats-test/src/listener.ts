@@ -15,30 +15,10 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  const options = stan
-    .subscriptionOptions()
-    .setDeliverAllAvailable() // important for the very first time
-    .setManualAckMode(true);
-
-  const subscription = stan.subscribe(
-    "ticket:created",
-    "Orders-service-Qgroup",
-    options
-  );
-
-  subscription.on("message", (msg: Message) => {
-    const data = msg.getData();
-
-    if (typeof data === "string") {
-      console.log(
-        `Received event #${msg.getSequence()}, with data: ${msg.getData()}`
-      );
-
-      msg.ack();
-    }
-  });
+  new TicketCreatedListener(stan).listen();
 });
 
+// problems with this on windows machines
 process.on("SIGINT", () => stan.close());
 process.on("SIGTERM", () => stan.close());
 
@@ -86,5 +66,16 @@ abstract class listener {
     return typeof data === "string"
       ? JSON.parse(data)
       : JSON.parse(data.toString("utf8"));
+  }
+}
+
+class TicketCreatedListener extends listener {
+  subject = "ticket:created";
+  queueGroupName = "payments-service";
+
+  onMessage(data: any, msg: Message) {
+    console.log("business logic...", data);
+
+    msg.ack(); // successful
   }
 }
