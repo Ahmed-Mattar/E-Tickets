@@ -14,6 +14,13 @@ const start = async () => {
 
   try {
     await natsWrapper.connect("ticketing", "asda", "http://nats-srv:4222");
+    natsWrapper.client.on("close", () => {
+      console.log("NATS connection closed!");
+      process.exit();
+    });
+    // windows platform issues on SIGINT and SIGTERM
+    process.on("SIGINT", () => natsWrapper.client.close());
+    process.on("SIGTERM", () => natsWrapper.client.close());
     // instead of localhost url use the service url followed by the port that mongoose use
     await mongoose.connect(process.env.MONGO_URI);
     console.log("connected to mongoDB");
