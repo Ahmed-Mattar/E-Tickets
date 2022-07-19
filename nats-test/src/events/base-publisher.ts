@@ -7,7 +7,7 @@ interface Event {
 }
 
 export abstract class Publisher<T extends Event> {
-  abstract suubject: T["subject"];
+  abstract subject: T["subject"];
   private client: Stan;
 
   constructor(client: Stan) {
@@ -15,7 +15,7 @@ export abstract class Publisher<T extends Event> {
   }
 
   publish(data: T["data"]) {
-    this.client.publish(this.suubject, data, () => {
+    this.client.publish(this.subject, data, () => {
       console.log("Event published.");
     });
   }
