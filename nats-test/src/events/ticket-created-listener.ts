@@ -8,6 +8,9 @@ export class TicketCreatedListener extends listener {
   onMessage(data: any, msg: Message) {
     console.log("business logic...", data);
 
+    console.log(data.name);
+    console.log(data.cost);
+
     msg.ack(); // successful
   }
 }
