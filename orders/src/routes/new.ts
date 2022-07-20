@@ -8,6 +8,7 @@ router.post(
   "/api/orders",
   requireAuth,
   [body("ticketId").not().isEmpty().withMessage("TicketId must be provided")],
+  validateRequest,
   async (req: Request, res: Response) => {
     res.send({});
   }
