@@ -1,5 +1,3 @@
-import { Subjects } from "@e-tickets/common";
-
 // fake implementation
 export const natsWrapper = {
   client: {
