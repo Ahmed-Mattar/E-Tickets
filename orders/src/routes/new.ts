@@ -1,6 +1,14 @@
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest } from "@e-tickets/common";
+import {
+  NotFoundError,
+  requireAuth,
+  validateRequest,
+  OrderStatus,
+  BadRequestError,
+} from "@e-tickets/common";
 import { body } from "express-validator";
+import { Ticket } from "../models/ticket";
+import { Order } from "../models/order";
 
 const router = express.Router();
 
@@ -10,6 +18,24 @@ router.post(
   [body("ticketId").not().isEmpty().withMessage("TicketId must be provided")],
   validateRequest,
   async (req: Request, res: Response) => {
+    const { ticketId } = req.body;
+
+    // Find the ticket the user is trying to order in the database
+    const ticket = await Ticket.findById(ticketId);
+    if (!ticket) {
+      throw new NotFoundError();
+    }
+    // Make sure that this ticket is not already reserved
+    const isReserved = await ticket.isReserved();
+    if (isReserved) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
+    // calculate expiration date for the order
+
+    // build the order and save it to the database
+
+    // publish an event saying that an order was created
+
     res.send({});
   }
 );
