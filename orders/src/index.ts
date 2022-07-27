@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
+import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
 
 const start = async () => {
   // set using kubectl secrets
@@ -37,6 +39,10 @@ const start = async () => {
     // windows platform issues on SIGINT and SIGTERM
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
+
     // instead of localhost url use the service url followed by the port that mongoose use
     await mongoose.connect(process.env.MONGO_URI);
     console.log("connected to mongoDB");
