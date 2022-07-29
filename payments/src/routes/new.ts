@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { stripe } from "../stripe";
 import { body } from "express-validator";
 import {
   requireAuth,
@@ -33,6 +34,12 @@ router.post(
     if (order.status === OrderStatus.Cancelled) {
       throw new BadRequestError("cancelled order");
     }
+
+    await stripe.charges.create({
+      currency: "usd",
+      amount: order.price * 100,
+      source: token,
+    });
 
     res.send({ success: true });
   }
