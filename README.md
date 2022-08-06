@@ -39,15 +39,6 @@ An E-Commerce app for selling and buying e-tickets using Microservices architect
 
 <center><br><h4>The app consists of 5 services</h4>
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-8bgf{border-color:inherit;font-style:italic;text-align:center;vertical-align:top}
-.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
-</style>
 <table class="tg">
 <thead>
   <tr>
@@ -117,7 +108,7 @@ An E-Commerce app for selling and buying e-tickets using Microservices architect
 <h2 id="payments-service"></h2>
 <h4 style="text-decoration:underline">Payment service flow</h4>
 <img src="./documentation/diagrams/Payment-service-flow.jpg"/>
-<img src="./documentation/diagrams/Payment-service-flow2.jpg"/>
+<img src="./documentation/diagrams/payment-service-flow2.jpg"/>
 
 <h2 id="expiration-service">expiration service</h2>
 <h4 style="text-decoration:underline">The Working of the expiration service</h4>
